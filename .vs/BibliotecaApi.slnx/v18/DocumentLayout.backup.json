@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Omar\\source\\repos\\BibliotecaApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9F04E9A0-91CB-D2BF-BA57-FBA592C5D391}|BibliotecaApi\\BibliotecaApi.csproj|c:\\users\\omar\\source\\repos\\bibliotecaapi\\bibliotecaapi\\controllers\\v2\\autorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F04E9A0-91CB-D2BF-BA57-FBA592C5D391}|BibliotecaApi\\BibliotecaApi.csproj|solutionrelative:bibliotecaapi\\controllers\\v2\\autorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AutoresController.cs",
+              "DocumentMoniker": "C:\\Users\\Omar\\source\\repos\\BibliotecaApi\\BibliotecaApi\\Controllers\\V2\\AutoresController.cs",
+              "RelativeDocumentMoniker": "BibliotecaApi\\Controllers\\V2\\AutoresController.cs",
+              "ToolTip": "C:\\Users\\Omar\\source\\repos\\BibliotecaApi\\BibliotecaApi\\Controllers\\V2\\AutoresController.cs",
+              "RelativeToolTip": "BibliotecaApi\\Controllers\\V2\\AutoresController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAYwE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T17:18:12.629Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
