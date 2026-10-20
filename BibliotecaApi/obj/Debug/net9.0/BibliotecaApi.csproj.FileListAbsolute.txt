@@ -177,3 +177,4 @@ C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\bin\Debug\net9.0\Swashbuc
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\BibliotecaApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\bin\Debug\net9.0\BibliotecaApi.staticwebassets.runtime.json
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\bin\Debug\net9.0\System.Linq.Dynamic.Core.dll
+C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\BibliotecaApi.sourcelink.json

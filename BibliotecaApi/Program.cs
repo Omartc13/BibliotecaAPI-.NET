@@ -55,6 +55,7 @@ builder.Services.AddTransient<IServiciosUsuarios, ServiciosUsuarios>();
 builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
 builder.Services.AddScoped<MiFiltroDeAccion>();
 builder.Services.AddScoped<FiltroValidacionLibro>();
+builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IServicioAutores, BibliotecaApi.Servicios.V1.ServicioAutores>();
 
 
 builder.Services.AddHttpContextAccessor();
