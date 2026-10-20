@@ -6,6 +6,7 @@ using BibliotecaApi.Entidades;
 using BibliotecaApi.Servicios;
 using BibliotecaApi.Servicios.V1;
 using BibliotecaApi.Utilidades;
+using BibliotecaApi.Utilidades.V1;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,7 @@ namespace BibliotecaApi.Controllers.V1
         //[OutputCache (Tags = [cache])]
         [ServiceFilter<MiFiltroDeAccion>()]
         [FiltroAgregarCabeceras("accion", "obtener-autores")]
+        [ServiceFilter<HATEOASAutoresAttribute>()]
         public async Task<IEnumerable<AutorDTO>> Get([FromQuery] PaginacionDTO paginacionDTO)
         {
             return await servicioAutoresV1.Get(paginacionDTO);
@@ -60,6 +62,7 @@ namespace BibliotecaApi.Controllers.V1
         [ProducesResponseType<AutorConLibrosDTO>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[OutputCache(Tags = [cache])]
+        [ServiceFilter<HATEOASAutorAttribute>]
         public async Task<ActionResult<AutorConLibrosDTO>> Get([Description("El id del autor")]int id)
         {
             var autor = await context.Autores

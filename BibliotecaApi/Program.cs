@@ -4,6 +4,7 @@ using BibliotecaApi.Entidades;
 using BibliotecaApi.Servicios;
 using BibliotecaApi.Swagger;
 using BibliotecaApi.Utilidades;
+using BibliotecaApi.Utilidades.V1;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +58,9 @@ builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
 builder.Services.AddScoped<MiFiltroDeAccion>();
 builder.Services.AddScoped<FiltroValidacionLibro>();
 builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IServicioAutores, BibliotecaApi.Servicios.V1.ServicioAutores>();
-
+builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IGeneradorEnlaces, BibliotecaApi.Servicios.V1.GeneradorEnlaces>();
+builder.Services.AddScoped<HATEOASAutorAttribute>();
+builder.Services.AddScoped<HATEOASAutoresAttribute>();
 
 builder.Services.AddHttpContextAccessor();
 
