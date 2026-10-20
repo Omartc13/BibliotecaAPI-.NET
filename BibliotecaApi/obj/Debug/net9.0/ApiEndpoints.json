@@ -1,5 +1,26 @@
 [
   {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RootController",
+    "Method": "Get",
+    "RelativePath": "api/v1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BibliotecaApi.DTOs.DatosHATEOASDTO, BibliotecaApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "ObtenerRootV1"
+  },
+  {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
     "Method": "Get",
     "RelativePath": "api/v1/autores",
@@ -28,7 +49,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "ObtenerAutoresV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
@@ -44,7 +66,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "CrearAutorV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresColeccionController",
@@ -60,7 +83,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "CrearAutoresV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresColeccionController",
@@ -176,7 +200,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "ActualizarAutorV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
@@ -197,7 +222,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "PatchAutorV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
@@ -213,7 +239,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "BorrarAutorV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
@@ -249,7 +276,8 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "CrearAutorConFotoV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.AutoresController",
@@ -320,7 +348,8 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "FiltrarAutoresV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
@@ -351,7 +380,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "ObtenerLibrosV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
@@ -367,7 +397,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "CrearLibroV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
@@ -394,7 +425,7 @@
         "StatusCode": 200
       }
     ],
-    "EndpointName": "GetLibrosV1"
+    "EndpointName": "ObtenerLibroV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
@@ -415,7 +446,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "ActualizarLibroV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
@@ -431,7 +463,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "BorrarLibroV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.ComentariosController",
@@ -457,7 +490,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "ObtenerComentariosV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.ComentariosController",
@@ -478,7 +512,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "CrearComentarioV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.ComentariosController",
@@ -536,7 +571,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "PatchComentarioV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.ComentariosController",
@@ -557,7 +593,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "BorrarComentarioV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -577,7 +614,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "ObtenerUsuariosV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -593,7 +631,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "ActualizarUsuariosV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -609,7 +648,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "HacerAdminUserV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -635,7 +675,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "LoginUsuarioV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -661,7 +702,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "CrearUsuarioV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -677,7 +719,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "EndpointName": "RemoverAdminUserV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
@@ -697,7 +740,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "RenovarTokenV1"
   },
   {
     "ContainingType": "BibliotecaApi.Controllers.V2.AutoresController",

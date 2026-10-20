@@ -30,7 +30,7 @@ namespace BibliotecaApi.Controllers.V1
             this.outputCacheStore = outputCacheStore;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "ObtenerLibrosV1")]
         [AllowAnonymous]
         [OutputCache(Tags = [cache])]
         public async Task<IEnumerable<LibroDTO>> Get([FromQuery] PaginacionDTO paginacionDTO)
@@ -46,7 +46,7 @@ namespace BibliotecaApi.Controllers.V1
             return librosDTO;
         }
 
-        [HttpGet("{id:int}", Name ="GetLibrosV1")]// api/libros/1
+        [HttpGet("{id:int}", Name = "ObtenerLibroV1")]// api/libros/1
         [AllowAnonymous]
         [OutputCache(Tags = [cache])]
         public async Task<ActionResult<LibroConAutoresDTO>> Get(int id)
@@ -66,7 +66,7 @@ namespace BibliotecaApi.Controllers.V1
             return libroDTO;
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CrearLibroV1")]
         [ServiceFilter<FiltroValidacionLibro>]
         public async Task<ActionResult> Post(LibroCreacionDTO libroCreacionDTO)
         {
@@ -78,7 +78,7 @@ namespace BibliotecaApi.Controllers.V1
             await outputCacheStore.EvictByTagAsync(cache, default);
             var libroDTO = mapper.Map<LibroDTO>(libro);
 
-            return CreatedAtRoute("GetLibrosV1", new { id = libro.Id }, libroDTO);
+            return CreatedAtRoute("ObtenerLibroV1", new { id = libro.Id }, libroDTO);
         }
 
         private void AsignarOrdenAutores(Libro libro)
@@ -92,7 +92,7 @@ namespace BibliotecaApi.Controllers.V1
             }
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}", Name = "ActualizarLibroV1")]
         [ServiceFilter<FiltroValidacionLibro>]
         public async Task<ActionResult> Put(LibroCreacionDTO libroCreacionDTO, int id)
         {
@@ -116,7 +116,7 @@ namespace BibliotecaApi.Controllers.V1
             return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}", Name = "BorrarLibroV1")]
         public async Task<ActionResult> Delete(int id)
         {
             var libroEncontrados = await context.Libros.Where(x => x.Id == id).ExecuteDeleteAsync();

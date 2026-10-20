@@ -20,6 +20,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "ObtenerAutoresV1",
         "parameters": [
           {
             "name": "Pagina",
@@ -74,6 +75,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "CrearAutorV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -178,6 +180,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "ActualizarAutorV1",
         "parameters": [
           {
             "name": "id",
@@ -278,6 +281,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "PatchAutorV1",
         "parameters": [
           {
             "name": "id",
@@ -340,6 +344,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "BorrarAutorV1",
         "parameters": [
           {
             "name": "id",
@@ -368,6 +373,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "FiltrarAutoresV1",
         "parameters": [
           {
             "name": "Pagina",
@@ -470,6 +476,7 @@
         "tags": [
           "Autores"
         ],
+        "operationId": "CrearAutorConFotoV1",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -598,6 +605,7 @@
         "tags": [
           "AutoresColeccion"
         ],
+        "operationId": "CrearAutoresV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -651,6 +659,7 @@
         "tags": [
           "Comentarios"
         ],
+        "operationId": "ObtenerComentariosV1",
         "parameters": [
           {
             "name": "libroId",
@@ -698,6 +707,7 @@
         "tags": [
           "Comentarios"
         ],
+        "operationId": "CrearComentarioV1",
         "parameters": [
           {
             "name": "libroId",
@@ -797,6 +807,7 @@
         "tags": [
           "Comentarios"
         ],
+        "operationId": "PatchComentarioV1",
         "parameters": [
           {
             "name": "id",
@@ -868,6 +879,7 @@
         "tags": [
           "Comentarios"
         ],
+        "operationId": "BorrarComentarioV1",
         "parameters": [
           {
             "name": "id",
@@ -905,6 +917,7 @@
         "tags": [
           "Libro"
         ],
+        "operationId": "ObtenerLibrosV1",
         "parameters": [
           {
             "name": "Pagina",
@@ -959,6 +972,7 @@
         "tags": [
           "Libro"
         ],
+        "operationId": "CrearLibroV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1000,7 +1014,7 @@
         "tags": [
           "Libro"
         ],
-        "operationId": "GetLibrosV1",
+        "operationId": "ObtenerLibroV1",
         "parameters": [
           {
             "name": "id",
@@ -1039,6 +1053,7 @@
         "tags": [
           "Libro"
         ],
+        "operationId": "ActualizarLibroV1",
         "parameters": [
           {
             "name": "id",
@@ -1089,6 +1104,7 @@
         "tags": [
           "Libro"
         ],
+        "operationId": "BorrarLibroV1",
         "parameters": [
           {
             "name": "id",
@@ -1112,11 +1128,51 @@
         ]
       }
     },
+    "/api/v1": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "operationId": "ObtenerRootV1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatosHATEOASDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatosHATEOASDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatosHATEOASDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/usuarios/registro": {
       "post": {
         "tags": [
           "Usuarios"
         ],
+        "operationId": "CrearUsuarioV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1170,6 +1226,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "LoginUsuarioV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1223,6 +1280,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "ObtenerUsuariosV1",
         "responses": {
           "200": {
             "description": "OK",
@@ -1264,6 +1322,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "ActualizarUsuariosV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1305,6 +1364,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "RenovarTokenV1",
         "responses": {
           "200": {
             "description": "OK",
@@ -1339,6 +1399,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "HacerAdminUserV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1380,6 +1441,7 @@
         "tags": [
           "Usuarios"
         ],
+        "operationId": "RemoverAdminUserV1",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -1674,6 +1736,24 @@
           "password": {
             "minLength": 1,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DatosHATEOASDTO": {
+        "type": "object",
+        "properties": {
+          "enlace": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "metodo": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
