@@ -20,7 +20,6 @@ namespace BibliotecaApi.Controllers.V1
     [ApiController]
     [Route("api/v1/autores")]
     [Authorize(Policy = "esadmin")]
-    [FiltroAgregarCabeceras("controlador","autores")]
     public class AutoresController: ControllerBase
     {
         private readonly AplicationDbContext context;
@@ -46,9 +45,7 @@ namespace BibliotecaApi.Controllers.V1
 
         [HttpGet(Name = "ObtenerAutoresV1")] //Api Autores
         [AllowAnonymous]
-        //[OutputCache (Tags = [cache])]
-        [ServiceFilter<MiFiltroDeAccion>()]
-        [FiltroAgregarCabeceras("accion", "obtener-autores")]
+        [OutputCache (Tags = [cache])]
         [ServiceFilter<HATEOASAutoresAttribute>()]
         public async Task<IEnumerable<AutorDTO>> Get([FromQuery] PaginacionDTO paginacionDTO)
         {
@@ -61,7 +58,7 @@ namespace BibliotecaApi.Controllers.V1
         [EndpointDescription("Obtiene un autor por su Id. Incluye sus libros. Si el autor no existe, se retorna 404")]
         [ProducesResponseType<AutorConLibrosDTO>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[OutputCache(Tags = [cache])]
+        [OutputCache(Tags = [cache])]
         [ServiceFilter<HATEOASAutorAttribute>]
         public async Task<ActionResult<AutorConLibrosDTO>> Get([Description("El id del autor")]int id)
         {

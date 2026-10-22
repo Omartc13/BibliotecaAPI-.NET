@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOutputCache(opciones =>
 {
-    opciones.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(15);
+    opciones.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(60);
 });
 
 var origenesPermitidos = builder.Configuration.GetSection("origenesPermitidos").Get<string[]>()!;
@@ -40,7 +40,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers(opciones =>
 {
-    opciones.Filters.Add<FiltroTiempoEjecucion>();
     opciones.Conventions.Add(new ConvencionAgrupaPorVersion());
 }).AddNewtonsoftJson();
 
@@ -55,7 +54,6 @@ builder.Services.AddScoped<UserManager<Usuario>>();
 builder.Services.AddScoped<SignInManager<Usuario>>();
 builder.Services.AddTransient<IServiciosUsuarios, ServiciosUsuarios>();
 builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
-builder.Services.AddScoped<MiFiltroDeAccion>();
 builder.Services.AddScoped<FiltroValidacionLibro>();
 builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IServicioAutores, BibliotecaApi.Servicios.V1.ServicioAutores>();
 builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IGeneradorEnlaces, BibliotecaApi.Servicios.V1.GeneradorEnlaces>();
