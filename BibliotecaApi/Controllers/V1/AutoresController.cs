@@ -192,7 +192,7 @@ namespace BibliotecaApi.Controllers.V1
         }
 
         [HttpPut("{id:int}", Name = "ActualizarAutorV1")]// api/autores/id
-        public async Task<ActionResult<Autor>> Put(int id, [FromForm]AutorCreacionDTOConFoto autorCreacionDTO)
+        public async Task<ActionResult> Put(int id, [FromForm]AutorCreacionDTOConFoto autorCreacionDTO)
         {
             var existeAutor = await context.Autores.AnyAsync(x => x.Id == id);
 
