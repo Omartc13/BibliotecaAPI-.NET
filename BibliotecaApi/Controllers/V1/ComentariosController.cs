@@ -174,7 +174,7 @@ namespace BibliotecaApi.Controllers.V1
                 return NotFound();
             }
 
-            if (comentarioDb.Usuario.Id != usuario.Id)
+            if (comentarioDb.UsuarioId != usuario.Id)
             {
                 return Forbid();
             }
