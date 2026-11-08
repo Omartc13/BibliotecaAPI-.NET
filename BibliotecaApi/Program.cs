@@ -1,5 +1,6 @@
 using BibliotecaApi;
 using BibliotecaApi.Datos;
+using BibliotecaApi.DTOs;
 using BibliotecaApi.Entidades;
 using BibliotecaApi.Servicios;
 using BibliotecaApi.Swagger;
@@ -149,6 +150,11 @@ builder.Services.AddSwaggerGen(opciones =>
     //});
 });
 
+builder.Services.AddOptions<LimitarPeticionesDTO>()
+    .Bind(builder.Configuration.GetSection(LimitarPeticionesDTO.Seccion))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -194,6 +200,8 @@ app.UseSwaggerUI(opciones =>
 app.UseStaticFiles();
 
 app.UseCors();
+
+app.UseLimitarPeticiones();
 
 app.UseOutputCache();
 

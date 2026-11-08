@@ -171,6 +171,27 @@ namespace BibliotecaApi.Migrations
                     b.ToTable("LlavesAPI");
                 });
 
+            modelBuilder.Entity("BibliotecaApi.Entidades.Peticion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaPeticion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LlaveId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LlaveId");
+
+                    b.ToTable("Peticiones");
+                });
+
             modelBuilder.Entity("BibliotecaApi.Entidades.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -419,6 +440,17 @@ namespace BibliotecaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.Peticion", b =>
+                {
+                    b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
+                        .WithMany()
+                        .HasForeignKey("LlaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Llave");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
