@@ -10,3 +10,7 @@ C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwe
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Omar\source\repos\BibliotecaApi\BibliotecaApi\obj\Debug\net9.0\staticwebassets.build.json
