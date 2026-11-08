@@ -8,6 +8,8 @@ namespace BibliotecaApi.Utilidades
     {
         public AutoMapperProfiles()
         {
+            CreateMap<LlaveAPI, LlaveDTO>();
+
             CreateMap<Autor,AutorDTO>()
                 .ForMember(dto => dto.NombreCompleto,
                     config => config.MapFrom(autor => MappearNombreYApellidoAutor(autor)));

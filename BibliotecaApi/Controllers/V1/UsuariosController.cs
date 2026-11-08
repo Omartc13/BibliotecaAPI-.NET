@@ -24,10 +24,11 @@ namespace BibliotecaApi.Controllers.V1
         private readonly IServiciosUsuarios serviciosUsuarios;
         private readonly AplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IServicioLlaves servicioLlaves;
 
         public UsuariosController(UserManager<Usuario> userManager, IConfiguration configuracion,
             SignInManager<Usuario> signInManager, IServiciosUsuarios serviciosUsuarios,
-            AplicationDbContext context, IMapper mapper) 
+            AplicationDbContext context, IMapper mapper, IServicioLlaves servicioLlaves) 
         {
             this.userManager = userManager;
             this.configuracion = configuracion;
@@ -35,6 +36,7 @@ namespace BibliotecaApi.Controllers.V1
             this.serviciosUsuarios = serviciosUsuarios;
             this.context = context;
             this.mapper = mapper;
+            this.servicioLlaves = servicioLlaves;
         }
 
         [HttpPost("registro", Name = "CrearUsuarioV1")]
@@ -51,7 +53,8 @@ namespace BibliotecaApi.Controllers.V1
 
             if (resultado.Succeeded)
             {
-                var respuestaAutenticacion = await ConstruirToken(credencialesUsuarioDTO);
+                var respuestaAutenticacion = await ConstruirToken(credencialesUsuarioDTO, usuario.Id);
+                await servicioLlaves.CrearLlave(usuario.Id, TipoLlave.Gratuita);
                 return respuestaAutenticacion;
             }
             else
@@ -81,7 +84,7 @@ namespace BibliotecaApi.Controllers.V1
 
             if (resultado.Succeeded)
             {
-                return await ConstruirToken(credencialesUsuarioDTO);
+                return await ConstruirToken(credencialesUsuarioDTO, usuario.Id);
             }
             else
             {
@@ -130,7 +133,7 @@ namespace BibliotecaApi.Controllers.V1
 
             var credencialesUsuarioDTO = new CredencialesUsuarioDTO { Email = usuario.Email! };
 
-            var respuestaAutenticacion = await ConstruirToken(credencialesUsuarioDTO);
+            var respuestaAutenticacion = await ConstruirToken(credencialesUsuarioDTO,usuario.Id);
             return respuestaAutenticacion;
         }
 
@@ -171,12 +174,13 @@ namespace BibliotecaApi.Controllers.V1
         }
 
         private async Task<RespuestaAutenticacionDTO> ConstruirToken (
-            CredencialesUsuarioDTO credencialesUsuarioDTO)
+            CredencialesUsuarioDTO credencialesUsuarioDTO, string usuarioId)
         {
             var claims = new List<Claim>
             {
                 new Claim("email", credencialesUsuarioDTO.Email),
-                new Claim("lo que yo qui", "Cualquier valor")
+                new Claim("lo que yo qui", "Cualquier valor"),
+                new Claim("usuarioid", usuarioId)
             };
 
             var usuario = await userManager.FindByEmailAsync(credencialesUsuarioDTO.Email);

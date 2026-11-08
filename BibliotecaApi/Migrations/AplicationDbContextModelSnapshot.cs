@@ -142,6 +142,35 @@ namespace BibliotecaApi.Migrations
                     b.ToTable("Libros");
                 });
 
+            modelBuilder.Entity("BibliotecaApi.Entidades.LlaveAPI", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activa")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Llave")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoLlave")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("LlavesAPI");
+                });
+
             modelBuilder.Entity("BibliotecaApi.Entidades.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -377,6 +406,17 @@ namespace BibliotecaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Libro");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.LlaveAPI", b =>
+                {
+                    b.HasOne("BibliotecaApi.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });

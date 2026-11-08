@@ -59,6 +59,7 @@ builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IServicioAutores, Bibliote
 builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IGeneradorEnlaces, BibliotecaApi.Servicios.V1.GeneradorEnlaces>();
 builder.Services.AddScoped<HATEOASAutorAttribute>();
 builder.Services.AddScoped<HATEOASAutoresAttribute>();
+builder.Services.AddScoped<IServicioLlaves, ServicioLlaves>();
 
 builder.Services.AddHttpContextAccessor();
 
@@ -149,6 +150,15 @@ builder.Services.AddSwaggerGen(opciones =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AplicationDbContext>();
+    if (dbContext.Database.IsRelational())
+    {
+        dbContext.Database.Migrate();
+    }
+}
 
 //Area de Middlewares
 
