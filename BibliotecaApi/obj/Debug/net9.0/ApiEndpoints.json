@@ -740,6 +740,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesIPController",
+    "Method": "Post",
+    "RelativePath": "api/v1/restriccionip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restriccionIPCreacionDTO",
+        "Type": "BibliotecaApi.DTOs.RestriccionIPCreacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesIPController",
+    "Method": "Delete",
+    "RelativePath": "api/v1/restriccionip",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesIPController",
+    "Method": "Put",
+    "RelativePath": "api/v1/restriccionip/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "restriccionIPActualizacionDTO",
+        "Type": "BibliotecaApi.DTOs.RestriccionIPActualizacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
     "Method": "Get",
     "RelativePath": "api/v1/usuarios",

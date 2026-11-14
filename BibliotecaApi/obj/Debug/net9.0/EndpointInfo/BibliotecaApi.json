@@ -1433,6 +1433,124 @@
         ]
       }
     },
+    "/api/v1/restriccionip": {
+      "post": {
+        "tags": [
+          "RestriccionesIP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPCreacionDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPCreacionDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPCreacionDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPCreacionDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "RestriccionesIP"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/restriccionip/{id}": {
+      "put": {
+        "tags": [
+          "RestriccionesIP"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPActualizacionDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPActualizacionDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPActualizacionDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionIPActualizacionDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v1": {
       "get": {
         "tags": [
@@ -2099,6 +2217,13 @@
               "$ref": "#/components/schemas/RestriccionDominioDTO"
             },
             "nullable": true
+          },
+          "restriccionesIP": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestriccionIPDTO"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2227,6 +2352,53 @@
           "dominio": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionIPActualizacionDTO": {
+        "required": [
+          "ip"
+        ],
+        "type": "object",
+        "properties": {
+          "ip": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionIPCreacionDTO": {
+        "required": [
+          "ip"
+        ],
+        "type": "object",
+        "properties": {
+          "llaveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ip": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionIPDTO": {
+        "required": [
+          "ip"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ip": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
