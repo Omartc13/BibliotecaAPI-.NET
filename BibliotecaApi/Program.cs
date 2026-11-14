@@ -61,7 +61,9 @@ builder.Services.AddRateLimiter(opciones =>
             {
                 PermitLimit = 5,
                 Window = TimeSpan.FromSeconds(10),
-                SegmentsPerWindow = 2
+                SegmentsPerWindow = 2,
+                QueueLimit = 1,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst
             });
     });
 
@@ -84,6 +86,20 @@ builder.Services.AddRateLimiter(opciones =>
             factory: _ => new ConcurrencyLimiterOptions
             {
                 PermitLimit = 1
+            });
+    });
+
+    opciones.AddPolicy("prueba-usuario", context =>
+    {
+        var emailClaim = context.User.Claims.Where(x => x.Type == "email").FirstOrDefault()!;
+        var email = emailClaim.Value;
+
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: email,
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 2,
+                Window = TimeSpan.FromSeconds(5)
             });
     });
 

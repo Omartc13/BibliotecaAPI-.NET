@@ -99,6 +99,7 @@ namespace BibliotecaApi.Controllers.V1
 
         [HttpGet(Name = "ObtenerUsuariosV1")]
         [Authorize(Policy ="esadmin")]
+        [EnableRateLimiting("prueba-usuario")]
         public async Task<IEnumerable<UsuarioDTO>> Get()
         {
             var usuarios = await context.Users.ToListAsync();
