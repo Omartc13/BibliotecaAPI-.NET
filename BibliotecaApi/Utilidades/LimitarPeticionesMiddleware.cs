@@ -82,6 +82,7 @@ namespace BibliotecaApi.Utilidades
             var llaveDb = await context.LlavesAPI
                 .Include(x => x.RestriccionesDominio)
                 .Include(x => x.RestriccionesIP)
+                .Include(x => x.Usuario)
                 .FirstOrDefaultAsync(x => x.Llave == llave);
 
             if(llaveDb is null)
@@ -125,6 +126,11 @@ namespace BibliotecaApi.Utilidades
                 await context.SaveChangesAsync();
 
                 await next(httpContext);
+            }else if (llaveDb.Usuario!.MalaPaga)
+            {
+                httpContext.Response.StatusCode = 400;
+                await httpContext.Response.WriteAsync("El usuario es mal pagador");
+                return;
             }
 
         }
