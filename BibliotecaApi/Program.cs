@@ -22,14 +22,84 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRateLimiter(opciones =>
 {
-    opciones.GlobalLimiter = PartitionedRateLimiter.Create < HttpContext, string>(context =>
-        RateLimitPartition.GetFixedWindowLimiter(
+    //opciones.GlobalLimiter = PartitionedRateLimiter.Create < HttpContext, string>(context =>
+    //    RateLimitPartition.GetFixedWindowLimiter(
+    //        partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
+    //        factory: _ => new FixedWindowRateLimiterOptions
+    //        {
+    //            PermitLimit = 5,
+    //            Window = TimeSpan.FromSeconds(10)
+    //        }));
+
+    opciones.AddPolicy("general", context =>
+    {
+        return RateLimitPartition.GetFixedWindowLimiter(
             partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
             factory: _ => new FixedWindowRateLimiterOptions
             {
-                PermitLimit = 5,
+                PermitLimit = 10,
                 Window = TimeSpan.FromSeconds(10)
-            }));
+            });
+    });
+
+    opciones.AddPolicy("estricta", context =>
+    {
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 2,
+                Window = TimeSpan.FromSeconds(5)
+            });
+    });
+
+    opciones.AddPolicy("movil", context =>
+    {
+        return RateLimitPartition.GetSlidingWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
+            factory: _ => new SlidingWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromSeconds(10),
+                SegmentsPerWindow = 2
+            });
+    });
+
+    opciones.AddPolicy("cubeta", context =>
+    {
+        return RateLimitPartition.GetTokenBucketLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
+            factory: _ => new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = 5,
+                TokensPerPeriod = 2,
+                ReplenishmentPeriod = TimeSpan.FromSeconds(10)
+            });
+    });
+
+    opciones.AddPolicy("concurrencia", context =>
+    {
+        return RateLimitPartition.GetConcurrencyLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "desconocido",
+            factory: _ => new ConcurrencyLimiterOptions
+            {
+                PermitLimit = 1
+            });
+    });
+
+    opciones.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    opciones.OnRejected = async (context, cancellationToken) =>
+    {
+        if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+        {
+            context.HttpContext.Response.Headers["Retry-After"] = retryAfter.TotalSeconds.ToString();
+        }
+
+
+        await context.HttpContext.Response.WriteAsync("Limite excesido. Intente mas tarde.", cancellationToken);
+    };
+
 });
 
 builder.Services.AddOutputCache(opciones =>

@@ -7,6 +7,7 @@ using BibliotecaApi.Utilidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,6 +18,7 @@ namespace BibliotecaApi.Controllers.V1
 {
     [ApiController]
     [Route("api/v1/usuarios")]
+    [EnableRateLimiting("estricta")]
     [DeshabilitarLimitarPeticiones]
     public class UsuariosController : ControllerBase
     {
@@ -71,6 +73,7 @@ namespace BibliotecaApi.Controllers.V1
         }
         
         [HttpPost("login", Name = "LoginUsuarioV1")]
+        
         public async Task<ActionResult<RespuestaAutenticacionDTO>> Login(
             CredencialesUsuarioDTO credencialesUsuarioDTO)
         {
@@ -124,6 +127,7 @@ namespace BibliotecaApi.Controllers.V1
 
         [HttpGet("renovar-token", Name = "RenovarTokenV1")]
         [Authorize]
+        [DisableRateLimiting]
         public async Task<ActionResult<RespuestaAutenticacionDTO>> RenovarToken()
         {
             var usuario = await serviciosUsuarios.ObtenerUsuario();
