@@ -342,6 +342,22 @@
     "EndpointName": "FiltrarAutoresV1"
   },
   {
+    "ContainingType": "BibliotecaApi.Controllers.V1.FacturasController",
+    "Method": "Pagar",
+    "RelativePath": "api/v1/facturas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facturaPagarDTO",
+        "Type": "BibliotecaApi.DTOs.FacturaPagarDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BibliotecaApi.Controllers.V1.LibroController",
     "Method": "Get",
     "RelativePath": "api/v1/libros",
