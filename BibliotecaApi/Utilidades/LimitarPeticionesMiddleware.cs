@@ -79,7 +79,10 @@ namespace BibliotecaApi.Utilidades
 
             var llave = llaveStringValues[0];
 
-            var llaveDb = await context.LlavesAPI.FirstOrDefaultAsync(x => x.Llave == llave);
+            var llaveDb = await context.LlavesAPI
+                .Include(x => x.RestriccionesDominio)
+                .Include(x => x.RestriccionesIP)
+                .FirstOrDefaultAsync(x => x.Llave == llave);
 
             if(llaveDb is null)
             {
@@ -92,6 +95,14 @@ namespace BibliotecaApi.Utilidades
             {
                 httpContext.Response.StatusCode = 400;
                 await httpContext.Response.WriteAsync("La llave no esta activa");
+                return;
+            }
+
+            var restriccionesSuperadas = PeticionSuperaAlgunaDeLasRestricciones(llaveDb, httpContext);
+
+            if (!restriccionesSuperadas)
+            {
+                httpContext.Response.StatusCode = 403;
                 return;
             }
 
@@ -116,6 +127,43 @@ namespace BibliotecaApi.Utilidades
                 await next(httpContext);
             }
 
+        }
+
+        private bool PeticionSuperaAlgunaDeLasRestricciones(LlaveAPI llaveAPI, HttpContext httpContext)
+        {
+            var hayRestricciones = llaveAPI.RestriccionesDominio.Any() ||
+                llaveAPI.RestriccionesIP.Any();
+
+            if (!hayRestricciones)
+            {
+                return true;
+            }
+
+            var peticionSuperarLasRestriccionesDeDominio = PeticionSuperarLasRestriccionesDeDominio(llaveAPI.RestriccionesDominio, httpContext);
+
+            return peticionSuperarLasRestriccionesDeDominio;
+        }
+
+        private bool PeticionSuperarLasRestriccionesDeDominio(List<RestriccionDominio> restricciones, HttpContext context)
+        {
+            if(restricciones is null || restricciones.Count == 0)
+            {
+                return false;
+            }
+
+            var refer = context.Request.Headers["referer"].ToString();
+
+            if(refer == string.Empty)
+            {
+                return false;
+            }
+
+            var miURI = new Uri(refer);
+            var dominio = miURI.Host;
+
+            var superaRestriccion = restricciones.Any(x => x.Dominio == dominio);
+
+            return superaRestriccion;
         }
     }
 }
