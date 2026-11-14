@@ -264,6 +264,9 @@ namespace BibliotecaApi.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<bool>("MalaPaga")
+                        .HasColumnType("bit");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -500,7 +503,7 @@ namespace BibliotecaApi.Migrations
             modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionDominio", b =>
                 {
                     b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
-                        .WithMany()
+                        .WithMany("RestriccionesDominio")
                         .HasForeignKey("LlaveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -511,7 +514,7 @@ namespace BibliotecaApi.Migrations
             modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionIP", b =>
                 {
                     b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
-                        .WithMany()
+                        .WithMany("RestriccionesIP")
                         .HasForeignKey("LlaveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -580,6 +583,13 @@ namespace BibliotecaApi.Migrations
                     b.Navigation("Autores");
 
                     b.Navigation("Comentarios");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.LlaveAPI", b =>
+                {
+                    b.Navigation("RestriccionesDominio");
+
+                    b.Navigation("RestriccionesIP");
                 });
 #pragma warning restore 612, 618
         }
