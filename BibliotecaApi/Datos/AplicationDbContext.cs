@@ -26,5 +26,7 @@ namespace BibliotecaApi.Datos
         public DbSet<Peticion> Peticiones { get; set; }
         public DbSet<RestriccionDominio> RestriccionDominio { get; set; }
         public DbSet<RestriccionIP> RestriccionIP { get; set; }
+        public DbSet<Factura> Facturas { get; set; }
+        public DbSet<FacturaEmitida> FacturasEmitidas { get; set; }
     }
 }

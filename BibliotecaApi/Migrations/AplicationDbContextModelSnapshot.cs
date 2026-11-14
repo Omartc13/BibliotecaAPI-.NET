@@ -124,6 +124,51 @@ namespace BibliotecaApi.Migrations
                     b.ToTable("Errores");
                 });
 
+            modelBuilder.Entity("BibliotecaApi.Entidades.Factura", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaEmision")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaLimiteDePago")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Monto")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Pagada")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Facturas");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.FacturaEmitida", b =>
+                {
+                    b.Property<int>("Mes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Año")
+                        .HasColumnType("int");
+
+                    b.HasKey("Mes", "Año");
+
+                    b.ToTable("FacturasEmitidas");
+                });
+
             modelBuilder.Entity("BibliotecaApi.Entidades.Libro", b =>
                 {
                     b.Property<int>("Id")
@@ -474,6 +519,17 @@ namespace BibliotecaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Libro");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.Factura", b =>
+                {
+                    b.HasOne("BibliotecaApi.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
