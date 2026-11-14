@@ -2,6 +2,7 @@ using BibliotecaApi;
 using BibliotecaApi.Datos;
 using BibliotecaApi.DTOs;
 using BibliotecaApi.Entidades;
+using BibliotecaApi.Jobs;
 using BibliotecaApi.Servicios;
 using BibliotecaApi.Swagger;
 using BibliotecaApi.Utilidades;
@@ -60,6 +61,9 @@ builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IServicioAutores, Bibliote
 builder.Services.AddScoped<BibliotecaApi.Servicios.V1.IGeneradorEnlaces, BibliotecaApi.Servicios.V1.GeneradorEnlaces>();
 builder.Services.AddScoped<HATEOASAutorAttribute>();
 builder.Services.AddScoped<HATEOASAutoresAttribute>();
+
+builder.Services.AddHostedService<FacturasBackgroundService>();
+
 builder.Services.AddScoped<IServicioLlaves, ServicioLlaves>();
 
 builder.Services.AddHttpContextAccessor();
