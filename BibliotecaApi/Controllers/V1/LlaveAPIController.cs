@@ -3,6 +3,7 @@ using BibliotecaApi.Datos;
 using BibliotecaApi.DTOs;
 using BibliotecaApi.Entidades;
 using BibliotecaApi.Servicios;
+using BibliotecaApi.Utilidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace BibliotecaApi.Controllers.V1
     [Route("api/v1/llavesapi")]
     [Authorize]
     [ApiController]
+    [DeshabilitarLimitarPeticiones]
     public class LlaveAPIController : ControllerBase
     {
         private readonly AplicationDbContext context;

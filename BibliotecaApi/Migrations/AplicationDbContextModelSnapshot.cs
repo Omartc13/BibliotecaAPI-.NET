@@ -192,6 +192,50 @@ namespace BibliotecaApi.Migrations
                     b.ToTable("Peticiones");
                 });
 
+            modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionDominio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Dominio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LlaveId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LlaveId");
+
+                    b.ToTable("RestriccionDominio");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionIP", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LlaveId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LlaveId");
+
+                    b.ToTable("RestriccionIP");
+                });
+
             modelBuilder.Entity("BibliotecaApi.Entidades.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -443,6 +487,28 @@ namespace BibliotecaApi.Migrations
                 });
 
             modelBuilder.Entity("BibliotecaApi.Entidades.Peticion", b =>
+                {
+                    b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
+                        .WithMany()
+                        .HasForeignKey("LlaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Llave");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionDominio", b =>
+                {
+                    b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
+                        .WithMany()
+                        .HasForeignKey("LlaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Llave");
+                });
+
+            modelBuilder.Entity("BibliotecaApi.Entidades.RestriccionIP", b =>
                 {
                     b.HasOne("BibliotecaApi.Entidades.LlaveAPI", "Llave")
                         .WithMany()

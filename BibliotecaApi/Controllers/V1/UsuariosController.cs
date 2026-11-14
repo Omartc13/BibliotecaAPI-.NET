@@ -3,6 +3,7 @@ using BibliotecaApi.Datos;
 using BibliotecaApi.DTOs;
 using BibliotecaApi.Entidades;
 using BibliotecaApi.Servicios;
+using BibliotecaApi.Utilidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace BibliotecaApi.Controllers.V1
 {
     [ApiController]
     [Route("api/v1/usuarios")]
+    [DeshabilitarLimitarPeticiones]
     public class UsuariosController : ControllerBase
     {
         private readonly UserManager<Usuario> userManager;
