@@ -687,6 +687,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesDominioController",
+    "Method": "Post",
+    "RelativePath": "api/v1/restriccionesdominio",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restriccionDominioCreacionDTO",
+        "Type": "BibliotecaApi.DTOs.RestriccionDominioCreacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesDominioController",
+    "Method": "Delete",
+    "RelativePath": "api/v1/restriccionesdominio",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BibliotecaApi.Controllers.V1.RestriccionesDominioController",
+    "Method": "Put",
+    "RelativePath": "api/v1/restriccionesdominio/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "restriccionDominioActualizacionDTO",
+        "Type": "BibliotecaApi.DTOs.RestriccionDominioActualizacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BibliotecaApi.Controllers.V1.UsuariosController",
     "Method": "Get",
     "RelativePath": "api/v1/usuarios",

@@ -1315,6 +1315,124 @@
         ]
       }
     },
+    "/api/v1/restriccionesdominio": {
+      "post": {
+        "tags": [
+          "RestriccionesDominio"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioCreacionDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioCreacionDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioCreacionDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioCreacionDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "RestriccionesDominio"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v1/restriccionesdominio/{id}": {
+      "put": {
+        "tags": [
+          "RestriccionesDominio"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioActualizacionDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioActualizacionDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioActualizacionDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestriccionDominioActualizacionDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v1": {
       "get": {
         "tags": [
@@ -1974,6 +2092,13 @@
           "tipoLlave": {
             "type": "string",
             "nullable": true
+          },
+          "restriccionesDominio": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestriccionDominioDTO"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2055,6 +2180,53 @@
           "expiracion": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionDominioActualizacionDTO": {
+        "required": [
+          "dominio"
+        ],
+        "type": "object",
+        "properties": {
+          "dominio": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionDominioCreacionDTO": {
+        "required": [
+          "dominio"
+        ],
+        "type": "object",
+        "properties": {
+          "llaveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dominio": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestriccionDominioDTO": {
+        "required": [
+          "dominio"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dominio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
