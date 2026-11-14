@@ -17,9 +17,14 @@ namespace BibliotecaApi.Jobs
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    Console.WriteLine("Ejecutando proceso de emision de facturas");
-                    await EmitirFacturas();
-                    await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+                    using (var scope = services.CreateScope())
+                    {
+                        var context = scope.ServiceProvider.GetRequiredService<AplicationDbContext>();
+                        //Console.WriteLine("Ejecutando proceso de emision de facturas");
+                        await EmitirFacturas(context);
+                        await SeterUsuariosMalaPaga(context);
+                        await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+                    }
                 }
             }catch (OperationCanceledException ex)
             {
@@ -28,11 +33,13 @@ namespace BibliotecaApi.Jobs
 
         }
 
-        private async Task EmitirFacturas()
+        private async Task SeterUsuariosMalaPaga(AplicationDbContext context)
         {
-            using (var scope = services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<AplicationDbContext>();
+            await context.Database.ExecuteSqlAsync($"EXEC Usuarios_SetearMalaPaga");
+        }
+
+        private async Task EmitirFacturas(AplicationDbContext context)
+        {
                 var hoy = DateTime.Today;
                 var fechaComparacion = hoy.AddMonths(-1);
 
@@ -46,7 +53,7 @@ namespace BibliotecaApi.Jobs
                     var fechaFin = fechaInicio.AddMonths(-1);
                     await context.Database.ExecuteSqlAsync($"EXEC Facturas_Crear {fechaInicio.ToString("yyyy-MM-dd")},{fechaFin.ToString("yyyy-MM-dd")}");
                 }
-            }
+            
         }
     }
 }
